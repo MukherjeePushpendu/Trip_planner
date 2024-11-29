@@ -1,0 +1,19 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    environment:
+      - NODE_ENV=production
+      - REACT_APP_API_URL=http://localhost:3000
+    volumes:
+      - ./src:/app/src
+    networks:
+      - trip-planner-network
+    restart: unless-stopped
+
+networks:
+  trip-planner-network:
+    driver: bridge
